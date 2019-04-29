@@ -1,0 +1,9 @@
+{
+    "name": "adimeo-data-suite/commons",
+    "autoload": {
+        "psr-4": { "AdimeoDataSuite\\": "" }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    }
+}
