@@ -1,5 +1,5 @@
 {
-    "name": "adimeo-data-suite/commons",
+    "name": "adimeo-data-suite/php-client",
     "autoload": {
         "psr-4": { "AdimeoDataSuite\\": "" }
     },
