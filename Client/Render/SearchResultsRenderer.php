@@ -86,6 +86,29 @@ class SearchResultsRenderer extends Renderable
   }
 
   /**
+   * @param SearchContext $context
+   * @param string $field
+   * @param string $label
+   * @param string $order ASC or DESC
+   */
+  public function getSortLinkRender($context, $field, $label, $order) {
+    $active = $context->getSort() == $field && strtolower($order) == strtolower($context->getOrder());
+    $newContext = clone $context;
+    $newContext->setOrder($order);
+    $newContext->setSort($field);
+    $link = new LinkRender();
+    $link->render($context, [
+      'label' => $label,
+      'attributes' => [
+        'rel' => 'nofollow',
+        'class' => $active ? 'active' : 'inactive'
+      ],
+      'urlParameters' => $newContext->getUrlParameters()
+    ]);
+    return $link;
+  }
+
+  /**
    * @return FacetRender[]
    */
   public function getFacetRenders()

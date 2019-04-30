@@ -8,11 +8,14 @@ class ResultRender extends Renderable
 
   private $id;
 
+  private $score;
+
   private $source;
 
   public function render($context, $data)
   {
     $this->id = $data['_id'];
+    $this->score = $data['_score'];
     $this->source = $data['_source'];
     $this->rendered = true;
     return $this;
@@ -32,6 +35,14 @@ class ResultRender extends Renderable
   public function getSource()
   {
     return $this->source;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getScore()
+  {
+    return $this->score;
   }
 
 }

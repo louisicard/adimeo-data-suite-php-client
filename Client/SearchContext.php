@@ -29,12 +29,12 @@ class SearchContext
   /**
    * @var string
    */
-  private $sort;
+  private $sort = '_score';
 
   /**
    * @var string
    */
-  private $order = 'ASC';
+  private $order = 'DESC';
 
   /**
    * SearchContext constructor.
