@@ -1,9 +1,11 @@
 {
     "name": "adimeo-data-suite/php-client",
     "autoload": {
-        "psr-4": { "AdimeoDataSuite\\": "" }
+        "psr-4": { "AdimeoDataSuite\\": "src/" }
     },
     "require": {
+        "php": ">=5.6",
+        "ext-json": "*",
         "guzzlehttp/guzzle": "^6.3"
     }
 }
