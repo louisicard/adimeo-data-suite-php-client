@@ -176,8 +176,16 @@ class AdsClient
             } elseif ($key == 'size') {
                 $context->setSize($value);
             } elseif ($key == 'sort') {
+              if(count(explode(',', $value)) == 2) {
                 $context->setSort(explode(',', $value)[0]);
                 $context->setOrder(explode(',', $value)[1]);
+              }
+              elseif(count(explode(',', $value)) == 5) {
+                $sortR = explode(',', $value);
+                $order = array_pop($sortR);
+                $context->setSort(implode(',', $sortR));
+                $context->setOrder($order);
+              }
             } elseif ($key == 'filter') {
                 foreach ($value as $filter) {
                     $filters[] = SearchFilter::parse($filter);
