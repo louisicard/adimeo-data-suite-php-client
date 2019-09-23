@@ -51,6 +51,10 @@ class AdsClient
      */
     protected $context;
 
+    protected $excludedFields = [];
+
+    protected $includedFields = [];
+
 
     /**
      * AdsClient constructor.
@@ -59,12 +63,14 @@ class AdsClient
      * @param string $analyzer
      * @param array $facets
      */
-    public function __construct($adsUrl, $mapping, $analyzer = 'standard', array $facets = [])
+    public function __construct($adsUrl, $mapping, $analyzer = 'standard', array $facets = [], $excludedFields = [], $includedFields = [])
     {
         $this->adsUrl = $adsUrl;
         $this->mapping = $mapping;
         $this->analyzer = $analyzer;
         $this->facets = $facets;
+        $this->excludedFields = $excludedFields;
+        $this->includedFields = $includedFields;
         $this->client = new Client();
     }
 
@@ -122,6 +128,12 @@ class AdsClient
         $querystringParts['facets'] = implode(',', $facets);
         $querystringParts['sticky_facets'] = implode(',', $stickyFacets);
         $querystringParts['facetOptions'] = $facetOptions;
+
+        if(count($this->excludedFields) > 0)
+          $querystringParts['exclude_fields'] = implode(',', $this->excludedFields);
+        if(count($this->includedFields) > 0)
+          $querystringParts['include_fields'] = implode(',', $this->includedFields);
+
 
         $url = $this->adsUrl . '/search-api/v2?' . $this->buildQueryString($querystringParts);
 
@@ -265,5 +277,38 @@ class AdsClient
     {
         $this->context = $context;
     }
+
+    /**
+     * @return array
+     */
+    public function getExcludedFields()
+    {
+      return $this->excludedFields;
+    }
+
+    /**
+     * @param array $excludedFields
+     */
+    public function setExcludedFields($excludedFields)
+    {
+      $this->excludedFields = $excludedFields;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIncludedFields()
+    {
+      return $this->includedFields;
+    }
+
+    /**
+     * @param array $includedFields
+     */
+    public function setIncludedFields($includedFields)
+    {
+      $this->includedFields = $includedFields;
+    }
+
 
 }
