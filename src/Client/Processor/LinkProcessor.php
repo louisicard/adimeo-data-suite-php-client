@@ -5,6 +5,7 @@ namespace AdimeoDataSuite\Client\Processor;
 
 /**
  * Class LinkProcessor
+ *
  * @package AdimeoDataSuite\Client\Processor
  */
 class LinkProcessor extends AbstractProcessor
@@ -25,9 +26,9 @@ class LinkProcessor extends AbstractProcessor
      */
     protected $attributes;
 
-
     /**
      * @param mixed $data
+     *
      * @return $this
      */
     public function process($data)

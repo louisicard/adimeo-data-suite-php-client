@@ -5,6 +5,7 @@ namespace AdimeoDataSuite\Client\Filter;
 
 /**
  * Class SearchFilter
+ *
  * @package AdimeoDataSuite\Client\Filter
  */
 class SearchFilter implements SearchFilterInterface
@@ -21,6 +22,7 @@ class SearchFilter implements SearchFilterInterface
 
     /**
      * SearchFilter constructor.
+     *
      * @param $field
      * @param $value
      */
@@ -29,7 +31,6 @@ class SearchFilter implements SearchFilterInterface
         $this->field = $field;
         $this->value = $value;
     }
-
 
     /**
      * @return string
@@ -41,10 +42,13 @@ class SearchFilter implements SearchFilterInterface
 
     /**
      * @param mixed $field
+     *
+     * @return SearchFilter
      */
     public function setField($field)
     {
         $this->field = $field;
+
         return $this;
     }
 
@@ -58,10 +62,13 @@ class SearchFilter implements SearchFilterInterface
 
     /**
      * @param mixed $value
+     *
+     * @return SearchFilter
      */
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
 

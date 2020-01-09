@@ -2,7 +2,11 @@
 
 namespace AdimeoDataSuite\Client\Facet;
 
-
+/**
+ * Class FacetOption
+ *
+ * @package AdimeoDataSuite\Client\Facet
+ */
 class FacetOption implements FacetOptionInterface
 {
     /**
@@ -17,6 +21,7 @@ class FacetOption implements FacetOptionInterface
 
     /**
      * FacetOption constructor.
+     *
      * @param string $optionType
      * @param string $optionValue
      */
@@ -36,10 +41,13 @@ class FacetOption implements FacetOptionInterface
 
     /**
      * @param string $optionType
+     *
+     * @return FacetOption
      */
     public function setOptionType($optionType)
     {
         $this->optionType = $optionType;
+
         return $this;
     }
 
@@ -53,12 +61,13 @@ class FacetOption implements FacetOptionInterface
 
     /**
      * @param string $optionValue
+     *
+     * @return FacetOption
      */
     public function setOptionValue($optionValue)
     {
         $this->optionValue = $optionValue;
+
         return $this;
     }
-
-
 }

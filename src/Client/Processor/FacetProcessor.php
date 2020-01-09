@@ -47,13 +47,13 @@ class FacetProcessor extends AbstractProcessor
 
     /**
      * FacetProcessor constructor.
+     *
      * @param AdsClient $searchClient
      */
     public function __construct(AdsClient $searchClient)
     {
         $this->searchClient = $searchClient;
     }
-
 
     /**
      * @param \AdimeoDataSuite\Client\Context\SearchContext $context
@@ -158,11 +158,13 @@ class FacetProcessor extends AbstractProcessor
 
     /**
      * @param AdsClient $searchClient
+     *
+     * @return FacetProcessor
      */
     public function setSearchClient($searchClient)
     {
         $this->searchClient = $searchClient;
+
         return $this;
     }
-
 }

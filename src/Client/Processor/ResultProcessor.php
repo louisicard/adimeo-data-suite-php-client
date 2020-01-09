@@ -5,6 +5,7 @@ namespace AdimeoDataSuite\Client\Processor;
 
 /**
  * Class ResultProcessor
+ *
  * @package AdimeoDataSuite\Client\Processor
  */
 class ResultProcessor extends AbstractProcessor
@@ -26,8 +27,8 @@ class ResultProcessor extends AbstractProcessor
     protected $source;
 
     /**
-     * @param \AdimeoDataSuite\Client\Context\SearchContext $context
      * @param mixed $data
+     *
      * @return $this
      */
     public function process($data)
@@ -63,5 +64,4 @@ class ResultProcessor extends AbstractProcessor
     {
         return $this->score;
     }
-
 }

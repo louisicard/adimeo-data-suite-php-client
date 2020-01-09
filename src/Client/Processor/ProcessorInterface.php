@@ -10,6 +10,11 @@ namespace AdimeoDataSuite\Client\Processor;
 
 use AdimeoDataSuite\Client\Context\SearchContext;
 
+/**
+ * Interface ProcessorInterface
+ *
+ * @package AdimeoDataSuite\Client\Processor
+ */
 interface ProcessorInterface
 {
     /**
