@@ -13,7 +13,6 @@ use AdimeoDataSuite\Client\Context\SearchContext;
  */
 class SearchResultsProcessor extends AbstractProcessor
 {
-
     /**
      * @var FacetProcessor[]
      */
@@ -46,6 +45,7 @@ class SearchResultsProcessor extends AbstractProcessor
 
     /**
      * SearchResultsProcessor constructor.
+     *
      * @param $searchClient
      * @param int $facetPageSize
      * @param string $facetSeeMoreLabel
@@ -59,8 +59,8 @@ class SearchResultsProcessor extends AbstractProcessor
 
 
     /**
-     * @param SearchContext $context
      * @param mixed $results
+     *
      * @return $this
      */
     public function process($results)
@@ -100,10 +100,11 @@ class SearchResultsProcessor extends AbstractProcessor
     }
 
     /**
-     * @param SearchContext $context
      * @param string $field
      * @param string $label
      * @param string $order ASC or DESC
+     *
+     * @return LinkProcessor
      */
     public function getSortLinkProcessor($field, $label, $order)
     {
@@ -165,21 +166,25 @@ class SearchResultsProcessor extends AbstractProcessor
 
     /**
      * @param PagerProcessor $pagerProcessor
+     *
+     * @return SearchResultsProcessor
      */
     protected function setPagerProcessor($pagerProcessor)
     {
         $this->pagerProcessor = $pagerProcessor;
+
         return $this;
     }
 
     /**
      * @param LinkProcessor $link
      * @param AdsClient $searchService
+     *
      * @return string
      */
     public function renderLinkToHTML($link, $searchService)
     {
-        $uri = $_SERVER['REQUEST_URI'];
+        $uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
         if (strpos($uri, '?') !== false) {
             $uri = substr($uri, 0, strpos($uri, '?'));
         }
@@ -201,11 +206,13 @@ class SearchResultsProcessor extends AbstractProcessor
 
     /**
      * @param AdsClient $searchClient
+     *
+     * @return SearchResultsProcessor
      */
     public function setSearchClient($searchClient)
     {
         $this->searchClient = $searchClient;
+
         return $this;
     }
-
 }

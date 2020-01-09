@@ -7,12 +7,11 @@ use AdimeoDataSuite\Client\AdsClient;
 
 /**
  * Class PagerProcessor
+ *
  * @package AdimeoDataSuite\Client\Processor
  */
 class PagerProcessor extends AbstractProcessor
 {
-
-
 
     /** @var AdsClient */
     protected $searchClient;
@@ -33,6 +32,7 @@ class PagerProcessor extends AbstractProcessor
 
     /**
      * @param mixed $data
+     *
      * @return $this
      */
     public function process($data)
@@ -136,11 +136,13 @@ class PagerProcessor extends AbstractProcessor
 
     /**
      * @param AdsClient $searchClient
+     *
+     * @return PagerProcessor
      */
     public function setSearchClient($searchClient)
     {
         $this->searchClient = $searchClient;
+
         return $this;
     }
-
 }

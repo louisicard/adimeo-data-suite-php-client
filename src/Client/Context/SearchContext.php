@@ -68,10 +68,14 @@ class SearchContext
 
     /**
      * @param string $query
+     *
+     * @return SearchContext
      */
     public function setQuery($query)
     {
         $this->query = $query;
+
+        return $this;
     }
 
     /**
@@ -84,6 +88,8 @@ class SearchContext
 
     /**
      * @param SearchFilterInterface[] $filters
+     *
+     * @return SearchContext
      */
     public function setFilters($filters)
     {
@@ -91,6 +97,8 @@ class SearchContext
         foreach ($filters as $filter) {
             $this->addFilter($filter);
         }
+
+        return $this;
     }
 
     /**
@@ -103,10 +111,14 @@ class SearchContext
 
     /**
      * @param int $from
+     *
+     * @return SearchContext
      */
     public function setFrom($from)
     {
         $this->from = $from;
+
+        return $this;
     }
 
     /**
@@ -119,10 +131,14 @@ class SearchContext
 
     /**
      * @param int $size
+     *
+     * @return SearchContext
      */
     public function setSize($size)
     {
         $this->size = $size;
+
+        return $this;
     }
 
     /**
@@ -135,10 +151,14 @@ class SearchContext
 
     /**
      * @param string $sort
+     *
+     * @return SearchContext
      */
     public function setSort($sort)
     {
         $this->sort = $sort;
+
+        return $this;
     }
 
     /**
@@ -151,14 +171,19 @@ class SearchContext
 
     /**
      * @param string $order
+     *
+     * @return SearchContext
      */
     public function setOrder($order)
     {
         $this->order = $order;
+
+        return $this;
     }
 
     /**
-     * @param SearchFilter $currentFilter
+     * @param SearchFilterInterface $filter
+     *
      * @return bool
      */
     public function hasFilter(SearchFilterInterface $filter)
@@ -173,16 +198,22 @@ class SearchContext
 
     /**
      * @param SearchFilterInterface $filter
+     *
+     * @return SearchContext
      */
     public function addFilter(SearchFilterInterface $filter)
     {
         if (!$this->hasFilter($filter)) {
             $this->filters[] = $filter;
         }
+
+        return $this;
     }
 
     /**
      * @param SearchFilterInterface $filter
+     *
+     * @return SearchContext
      */
     public function removeFilter(SearchFilterInterface $filter)
     {
@@ -193,10 +224,13 @@ class SearchContext
             }
         }
         $this->setFilters(array_values($filters));
+
+        return $this;
     }
 
     /**
      * @param $field
+     *
      * @return int
      */
     public function getFiltersCount($field)
@@ -236,7 +270,7 @@ class SearchContext
         foreach ($this->getFilters() as $filter) {
             $params['filter'][] = $filter->getQuerystringPart();
         }
+
         return $params;
     }
-
 }

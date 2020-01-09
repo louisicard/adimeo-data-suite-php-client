@@ -2,7 +2,11 @@
 
 namespace AdimeoDataSuite\Client\Facet;
 
-
+/**
+ * Class Facet
+ *
+ * @package AdimeoDataSuite\Client\Facet
+ */
 class Facet
 {
 
@@ -42,10 +46,13 @@ class Facet
 
     /**
      * @param string $name
+     *
+     * @return Facet
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -59,6 +66,8 @@ class Facet
 
     /**
      * @param bool $sticky
+     *
+     * @return Facet
      */
     public function setSticky($sticky = true)
     {
@@ -77,11 +86,13 @@ class Facet
 
     /**
      * @param FacetOptionInterface $option
+     *
+     * @return Facet
      */
     public function addOption(FacetOptionInterface $option)
     {
         $this->options[$option->getOptionType()] = $option;
+
         return $this;
     }
-
 }

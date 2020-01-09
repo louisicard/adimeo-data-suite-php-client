@@ -11,13 +11,14 @@ ini_set('display_errors', 1);
 ini_set('error_reporting', E_ALL);
 ini_set('xdebug.var_display_max_depth', 15);
 
-require_once '../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $searchClient = new AdsClient('http://ads.adimeo.eu', 'ods_medecins.medecin', 'french');
 // $results = $searchClient->search();var_dump($results);exit;
-$searchClient->addFacet((new Facet('etab.lib.raw'))->setSticky());
-$searchClient->addFacet(new Facet('consultation.est_prive'));
-$searchClient->addFacet(new Facet('metier.raw'));
+$searchClient
+    ->addFacet((new Facet('etab.lib.raw'))->setSticky())
+    ->addFacet(new Facet('consultation.est_prive'))
+    ->addFacet(new Facet('metier.raw'));
 
 $results = $searchClient->search();
 

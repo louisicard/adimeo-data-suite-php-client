@@ -102,7 +102,9 @@ class AdsClient
     }
 
     /**
-     * @param SearchContext $searchContext
+     * @param SearchContext $context
+     *
+     * @return string
      */
     public function buildAPIUrl(SearchContext $context)
     {
@@ -130,18 +132,17 @@ class AdsClient
         $querystringParts['facetOptions'] = $facetOptions;
 
         if(count($this->excludedFields) > 0)
-          $querystringParts['exclude_fields'] = implode(',', $this->excludedFields);
+            $querystringParts['exclude_fields'] = implode(',', $this->excludedFields);
         if(count($this->includedFields) > 0)
-          $querystringParts['include_fields'] = implode(',', $this->includedFields);
+            $querystringParts['include_fields'] = implode(',', $this->includedFields);
 
 
-        $url = $this->adsUrl . '/search-api/v2?' . $this->buildQueryString($querystringParts);
-
-        return $url;
+        return $this->adsUrl . '/search-api/v2?' . $this->buildQueryString($querystringParts);
     }
 
     /**
      * @param $params
+     *
      * @return string
      */
     public function buildQueryString($params)
@@ -188,16 +189,16 @@ class AdsClient
             } elseif ($key == 'size') {
                 $context->setSize($value);
             } elseif ($key == 'sort') {
-              if(count(explode(',', $value)) == 2) {
-                $context->setSort(explode(',', $value)[0]);
-                $context->setOrder(explode(',', $value)[1]);
-              }
-              elseif(count(explode(',', $value)) == 5) {
-                $sortR = explode(',', $value);
-                $order = array_pop($sortR);
-                $context->setSort(implode(',', $sortR));
-                $context->setOrder($order);
-              }
+                if(count(explode(',', $value)) == 2) {
+                    $context->setSort(explode(',', $value)[0]);
+                    $context->setOrder(explode(',', $value)[1]);
+                }
+                elseif(count(explode(',', $value)) == 5) {
+                    $sortR = explode(',', $value);
+                    $order = array_pop($sortR);
+                    $context->setSort(implode(',', $sortR));
+                    $context->setOrder($order);
+                }
             } elseif ($key == 'filter') {
                 foreach ($value as $filter) {
                     $filters[] = SearchFilter::parse($filter);
@@ -235,6 +236,9 @@ class AdsClient
 
     /**
      * @param Facet[] $facets
+     *
+     * @return AdsClient
+     *
      * @throws SearchException
      */
     public function setFacets(array $facets)
@@ -243,10 +247,15 @@ class AdsClient
         foreach ($facets as $facet) {
             $this->addFacet($facet);
         }
+
+        return $this;
     }
 
     /**
      * @param Facet $facet
+     *
+     * @return AdsClient
+     *
      * @throws SearchException
      */
     public function addFacet($facet)
@@ -255,6 +264,8 @@ class AdsClient
             throw new SearchException('Query string has already been parsed. Can no longer add facets.');
         }
         $this->facets[] = $facet;
+
+        return $this;
     }
 
     /**
@@ -272,10 +283,14 @@ class AdsClient
 
     /**
      * @param SearchContext $context
+     *
+     * @return AdsClient
      */
     public function setContext($context)
     {
         $this->context = $context;
+
+        return $this;
     }
 
     /**
@@ -283,15 +298,19 @@ class AdsClient
      */
     public function getExcludedFields()
     {
-      return $this->excludedFields;
+        return $this->excludedFields;
     }
 
     /**
      * @param array $excludedFields
+     *
+     * @return AdsClient
      */
     public function setExcludedFields($excludedFields)
     {
-      $this->excludedFields = $excludedFields;
+        $this->excludedFields = $excludedFields;
+
+        return $this;
     }
 
     /**
@@ -299,16 +318,18 @@ class AdsClient
      */
     public function getIncludedFields()
     {
-      return $this->includedFields;
+        return $this->includedFields;
     }
 
     /**
      * @param array $includedFields
+     *
+     * @return AdsClient
      */
     public function setIncludedFields($includedFields)
     {
-      $this->includedFields = $includedFields;
+        $this->includedFields = $includedFields;
+
+        return $this;
     }
-
-
 }
