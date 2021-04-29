@@ -225,6 +225,15 @@ class AdsClient
 
         return $this->context;
     }
+    
+    /**
+     * @param $string
+     * @return array|string|string[]|null
+     */
+    public function cleanUpQueryString($string) {
+        $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+        return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+    }
 
     /**
      * @return Facet[]
@@ -274,7 +283,7 @@ class AdsClient
     public function getContext()
     {
         if(empty($this->context)) {
-            $queryString = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+            $queryString = isset($_SERVER['QUERY_STRING']) ? $this->cleanUpQueryString($_SERVER['QUERY_STRING']) : '';
             $this->initContextFromQueryString($queryString);
         }
 
