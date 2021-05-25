@@ -183,7 +183,7 @@ class AdsClient
         }
         foreach ($params as $key => $value) {
             if ($key == 'query') {
-                $context->setQuery($value);
+                $context->setQuery($this->cleanUpQueryString($value));
             } elseif ($key == 'from') {
                 $context->setFrom($value);
             } elseif ($key == 'size') {
@@ -231,8 +231,8 @@ class AdsClient
      * @return array|string|string[]|null
      */
     public function cleanUpQueryString($string) {
-        $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
-        return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+        $decodedString = html_entity_decode($string, ENT_QUOTES);
+        return preg_replace('/[^\p{L}\p{Zs}0-9\-]/u', '', $decodedString); // Removes special chars.
     }
 
     /**
@@ -283,7 +283,7 @@ class AdsClient
     public function getContext()
     {
         if(empty($this->context)) {
-            $queryString = isset($_SERVER['QUERY_STRING']) ? $this->cleanUpQueryString($_SERVER['QUERY_STRING']) : '';
+            $queryString = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
             $this->initContextFromQueryString($queryString);
         }
 
